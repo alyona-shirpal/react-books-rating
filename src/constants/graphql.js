@@ -26,6 +26,19 @@ const queries = {
     login(email: $email, password: $password)
   }
 `,
+  registerMutation: gql`
+  mutation registerMutation($username: String!, $email: String!, $password: String!) {
+    createUser(data: {
+      username: $username,
+      email: $email,
+      password: $password
+    }) {
+      id
+      username
+      email
+    }
+  }
+`
 }
 
 export default queries;
