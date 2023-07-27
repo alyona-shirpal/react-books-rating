@@ -21,6 +21,11 @@ const queries = {
     }
   }
 `,
+  loginMutation: gql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password)
+  }
+`,
 }
 
 export default queries;
