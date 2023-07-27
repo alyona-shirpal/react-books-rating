@@ -1,0 +1,28 @@
+body, h1, h2, h3, h4, h5, h6, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #456;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 10px;
+  padding-left: 10px;
+}
+
+.navbar a:hover {
+  color: #f0f0f0;
+}
+
+.navbar .right-links {
+  display: flex;
+  align-items: center;
+}
