@@ -1,8 +1,8 @@
 import React from 'react';
-import Book from "../../components/Book/Book";
-import { Link } from "react-router-dom";
+import Book from '../../components/Book/Book';
+import { Link } from 'react-router-dom';
 import '../../AppRouter.css';
-import { useQuery } from "@apollo/client";
+import { useQuery } from '@apollo/client';
 import queries from '../../constants/graphql';
 
 const Home = () => {
@@ -12,7 +12,6 @@ const Home = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   const booksData = data.books;
-  console.log(booksData);
 
   return (
     <div>

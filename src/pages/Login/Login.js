@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import queries from '../../constants/graphql';
 
+import { useNavigate } from 'react-router';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const [login, { loading, error }] = useMutation(queries.loginMutation);
 
@@ -21,23 +24,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const { data } = await login({
-        variables: {
-          email: email,
-          password: password,
-        },
-      });
-
-      if (data && data.login) {
-        setLoginSuccess(true);
+    const { data } = await login({
+      variables: {
+        email: email,
+        password: password
       }
+    });
 
-      setEmail('');
-      setPassword('');
-    } catch (error) {
-      console.log(error);
+    if (data && data.login) {
+      setLoginSuccess(true);
+      localStorage.setItem('token', data.login);
+      navigate('/');
     }
+
+    setEmail('');
+    setPassword('');
   };
 
   if (loginSuccess) {
@@ -81,7 +82,7 @@ const Login = () => {
       </form>
       {error && <p>Error: {error.message}</p>}
       <p className="mt-3">
-        Don't have an account? <Link to="/register">Register</Link>
+        Do not have an account? <Link to="/register">Register</Link>
       </p>
     </div>
   );

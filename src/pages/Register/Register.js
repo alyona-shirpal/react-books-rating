@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import queries from "../../constants/graphql";
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import queries from '../../constants/graphql';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [registerSuccess, setRegisterSuccess] = useState(false)
+  const [registerSuccess, setRegisterSuccess] = useState(false);
 
-  const [register,{loading, error}] = useMutation(queries.registerMutation);
+  const [register, { loading, error }] = useMutation(queries.registerMutation);
 
   const handleUserNameChange = (e) => {
     setUsername(e.target.value);
@@ -24,7 +24,6 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,7 +32,7 @@ const Register = () => {
         variables: {
           username,
           email,
-          password,
+          password
         }
       });
 
@@ -44,20 +43,21 @@ const Register = () => {
       setUsername('');
       setEmail('');
       setPassword('');
-    } catch(e) {
+    } catch (e) {
+      // eslint-disable-next-line no-undef
       console.log(e);
     }
   };
 
-  if(registerSuccess) {
+  if (registerSuccess) {
     return (
       <div className="container mt-5">
         <p>Successfully registered!</p>
       </div>
-    )
+    );
   }
 
-  return(
+  return (
     <div className="container mt-5">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
@@ -97,13 +97,15 @@ const Register = () => {
             required
           />
         </div>
-      <button type="submit" className="btn btn-primary">
-        {loading ? 'Logging in...' : 'Submit'}
-      </button>
+        <button type="submit" className="btn btn-primary">
+          {loading ? 'Logging in...' : 'Submit'}
+        </button>
       </form>
       {error && <p>Error: {error.message}</p>}
-      <p className="mt-3">Already have an account? <Link to="/">Login</Link></p>
+      <p className="mt-3">
+        Already have an account? <Link to="/">Login</Link>
+      </p>
     </div>
-  )
-}
+  );
+};
 export default Register;
